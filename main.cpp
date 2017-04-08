@@ -6,6 +6,15 @@
 #include "Class.Enemy.hpp"
 #include "Class.Gamer.hpp"
 #include "Class.Shoot.hpp"
+#include "init.hpp"
+
+void	display_limit(Ncurse *game){
+	game->clear();
+	game->print("*", 0, 0);
+	game->print("*", 0, 79);
+	game->print("*", 22, 0);
+	game->print("*", 22, 79);
+}
 
 void print_info(Ncurse *i, int t) { // Player *p
 	i->clear();
@@ -32,6 +41,20 @@ void print_info(Ncurse *i, int t) { // Player *p
 	i->print(s4.str().c_str(), 0, 51);
 }
 
+void		player(Gamer *p, int key){
+	if (key == KEY_LEFT)
+		*p << *p;
+	else if (key == KEY_RIGHT)
+		*p >> *p;
+	else if (key == KEY_UP)
+		--*p;
+	else if (key == KEY_DOWN)
+		++*p;
+	else if (key == 32){
+		list_add_Entities(new Shoot("+", 0, 0, p->getPosX() + 1, p->getPosY()));
+	}
+}
+
 int main(void) {
 	time_t start = time(0);
 	srand(time(NULL));
@@ -43,25 +66,12 @@ int main(void) {
 	title.print("ft_retro", 0, 36);
 	title.refresh();
 	while (1) {
-		game.clear();
-		game.print("*", 0, 0);
-		game.print("*", 0, 79);
-		game.print("*", 22, 0);
-		game.print("*", 22, 79);
+		display_limit(&game);
 		game.print(p.getName(), p.getPosY(), p.getPosX());
 		key = game.waitForInput();
-		if (key == KEY_LEFT)
-			p << p;
-		else if (key == KEY_RIGHT)
-			p >> p;
-		else if (key == KEY_UP)
-			--p;
-		else if (key == KEY_DOWN)
-			++p;
-		else if (key == 32){
-			;
-		}
-		else if (key == 27) {
+		player(&p, key);
+		eventLoop(&game);
+		if (key == 27) {
 			endwin();
 			break;
 		}

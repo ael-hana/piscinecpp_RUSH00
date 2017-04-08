@@ -13,9 +13,5 @@ class Enemy : public Aplayer
 		Enemy &operator=(Enemy const &);
 		~Enemy(void);
 		Enemy(std::string, int, int, int, int);
-		Enemy &operator++(void);
-		Enemy &operator--(void);
-		Enemy &operator<<(Enemy const &);
-		Enemy &operator>>(Enemy const &);
 };
 #endif

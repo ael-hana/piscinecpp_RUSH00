@@ -30,9 +30,9 @@ public:
 	int				setLife(int);
 	Aplayer			&operator++(void);
 	Aplayer			&operator--(void);
-	Aplayer			&operator<<(Aplayer const &);
-	Aplayer			&operator>>(Aplayer const &);
-	~Aplayer();
+	Aplayer	&operator<<(Aplayer const &);
+	Aplayer	&operator>>(Aplayer const &);
+	virtual			~Aplayer();
 	Aplayer(std::string, int, int, int, int);
 	Aplayer(void);
 };

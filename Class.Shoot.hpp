@@ -10,7 +10,7 @@ public:
 	Shoot(std::string, int, int, int, int);
 	Shoot(Shoot const &);
 	Shoot &operator=(Shoot const &);
-	~Shoot();
+	virtual ~Shoot();
 
 };
 #endif

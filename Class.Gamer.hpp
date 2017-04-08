@@ -11,7 +11,7 @@ public:
 	Gamer(std::string, int, int, int, int);
 	Gamer(Gamer const &);
 	Gamer &operator=(Gamer const &);
-	~Gamer();
+	virtual		~Gamer();
 
 };
 #endif

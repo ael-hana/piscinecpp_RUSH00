@@ -1,4 +1,5 @@
 #include "Class.Shoot.hpp"
+#include "init.hpp"
 
 Shoot::Shoot(std::string str, int life, int attack, int x, int y){
 	this->_name = str;
@@ -21,4 +22,7 @@ Shoot	&Shoot::operator=(Shoot const & ins){
 	this->_attack = ins._attack;
 	this->_touch = ins._touch;
 	return (*this);
+}
+
+Shoot::~Shoot(){
 }
