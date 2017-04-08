@@ -41,32 +41,6 @@ Enemy	&Enemy::operator=(Enemy const & ins){
 	this->_x = ins._x;
 	this->_y = ins._y;
 	this->_attack = ins._attack;
+	this->_touch = ins._touch;
 	return (*this);
-}
-
-std::string		Enemy::getName(void){
-	return this->_name;
-}
-
-int			Enemy::getPosX(void){
-	return (this->_x);
-}
-
-int			Enemy::getPosY(void){
-	return (this->_y);
-}
-
-int			Enemy::getAttach(void){
-	return (this->_attack);
-}
-
-int			Enemy::getLife(void){
-	return (this->_life);
-}
-
-int			Enemy::setLife(int val){
-	this->_life = val;
-	if (this->_life < 0)
-		this->_life = 0;
-	return this->_life;
 }
