@@ -13,28 +13,6 @@ Enemy::Enemy(Enemy const &ins){
 	*this = ins;
 }
 
-Enemy	&Enemy::operator++(void){
-	++this->_y;
-	return (*this);
-}
-
-Enemy	&Enemy::operator--(void){
-	--this->_y;
-	return (*this);
-}
-
-Enemy	&Enemy::operator<<(Enemy const & ins){
-	(void)ins;
-	--this->_x;
-	return (*this);
-}
-
-Enemy	&Enemy::operator>>(Enemy const & ins){
-	(void) ins;
-	++this->_x;
-	return (*this);
-}
-
 Enemy	&Enemy::operator=(Enemy const & ins){
 	this->_name = ins._name;
 	this->_life = ins._life;

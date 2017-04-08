@@ -36,3 +36,25 @@ int			Aplayer::setLife(int val){
 		this->_life = 0;
 	return this->_life;
 }
+
+Aplayer	&Aplayer::operator++(void){
+	++this->_y;
+	return (*this);
+}
+
+Aplayer	&Aplayer::operator--(void){
+	--this->_y;
+	return (*this);
+}
+
+Aplayer	&Aplayer::operator<<(Aplayer const & ins){
+	(void)ins;
+	--this->_x;
+	return (*this);
+}
+
+Aplayer	&Aplayer::operator>>(Aplayer const & ins){
+	(void) ins;
+	++this->_x;
+	return (*this);
+}

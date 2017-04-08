@@ -19,14 +19,14 @@ protected:
 	unsigned int	_touch;
 	int				_x;
 	int				_y;
+
+public:
 	int				getPosX(void);
 	int				getPosY(void);
 	int				getAttach(void);
 	int				getLife(void);
 	std::string		getName(void);
 	int				setLife(int);
-
-public:
 	Aplayer(void);
 	~Aplayer();
 };
