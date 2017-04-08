@@ -7,6 +7,7 @@
 #include "Class.Gamer.hpp"
 #include "Class.Shoot.hpp"
 #include "init.hpp"
+#include "initEnemy.hpp"
 
 void	display_limit(Ncurse *game){
 	game->clear();
@@ -71,6 +72,7 @@ int main(void) {
 		key = game.waitForInput();
 		player(&p, key);
 		eventLoop(&game);
+		eventLoopEnemy(&game);
 		if (key == 27) {
 			endwin();
 			break;

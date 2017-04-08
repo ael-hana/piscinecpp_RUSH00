@@ -1,6 +1,7 @@
-#include "init.hpp"
+#include "initEnemy.hpp"
+#include "Class.Enemy.hpp"
 
-t_node	*insList(t_node *ins, int opt = 0)
+t_node	*insListEnemy(t_node *ins, int opt = 0)
 {
 	static t_node *ptr = NULL;
 
@@ -15,14 +16,14 @@ t_node	*insList(t_node *ins, int opt = 0)
 	return ptr;
 }
 
-void	list_add_Entities(Aplayer *ins)
+void	list_add_EntitiesEnemy(Aplayer *ins)
 {
 	t_node *list = new node;
 	t_node	*ptr = NULL;
 
 	list->ptr = ins;
 	list->next = NULL;
-	ptr = insList(list);
+	ptr = insListEnemy(list);
 	if (ptr == NULL)
 		return;
 	while (ptr->next)
@@ -30,17 +31,20 @@ void	list_add_Entities(Aplayer *ins)
 	ptr->next = list;
 }
 
-void	eventLoop(Ncurse *game){
+void	eventLoopEnemy(Ncurse *game){
 	t_node	*ptr;
 	t_node	*tmp;
 	static int	loop = 0;
-
+	char		tab[] = "ABCDEFGH";
+	std::string str(1, tab[rand() % 8]);
 	++loop;
-	ptr = insList(NULL);
+	ptr = insListEnemy(NULL);
+	if (loop % 3000 == 0)
+		list_add_EntitiesEnemy(new Enemy(str, 0, 0, WINDOW_X, rand() % WINDOW_Y));
 	while (ptr) {
 		if (loop % 100 == 0)
-			*(ptr->ptr) >> *(ptr->ptr);
-		if (ptr->ptr->getPosX() == WINDOW_X)
+			*(ptr->ptr) << *(ptr->ptr);
+		if (ptr->ptr->getPosX() == 0)
 		{
 			tmp = ptr->next;
 			list_free_Entities(ptr->ptr);
@@ -54,12 +58,12 @@ void	eventLoop(Ncurse *game){
 	}
 }
 
-void	list_free_Entities(Aplayer *ins)
+void	list_free_EntitiesEnemy(Aplayer *ins)
 {
 	t_node	*ptr;
 	t_node	*tmp;
 
-	ptr = insList(NULL);
+	ptr = insListEnemy(NULL);
 	if (ptr == NULL)
 		return;
 	if (ins == ptr->ptr)
