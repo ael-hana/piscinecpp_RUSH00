@@ -4,8 +4,6 @@
 #include <curses.h>
 #include <iostream>
 
-#define KEY_SPACE 32
-
 class Ncurse {
   public:
     Ncurse(int nbLine, int nbColumn, int posx, int posy);

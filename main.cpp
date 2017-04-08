@@ -3,6 +3,9 @@
 #include <sstream>
 #include <fstream>
 #include <time.h>
+#include "Class.Enemy.hpp"
+#include "Class.Gamer.hpp"
+#include "Class.Shoot.hpp"
 
 void print_info(Ncurse *i, int t) { // Player *p
 	i->clear();
@@ -33,6 +36,7 @@ int main(void) {
 	time_t start = time(0);
 	srand(time(NULL));
 	int key;
+	Gamer p(">", 10, 0, 10, 10);
 	Ncurse title(1, 80, 0, 0);
 	Ncurse game(23, 80, 1, 0);
 	Ncurse info(1, 80, 24, 0);
@@ -44,14 +48,26 @@ int main(void) {
 		game.print("*", 0, 79);
 		game.print("*", 22, 0);
 		game.print("*", 22, 79);
+		game.print(p.getName(), p.getPosY(), p.getPosX());
 		key = game.waitForInput();
-    	if (key == 27) {
-      		endwin();
-      		break;
-    	}
-    	print_info(&info, start);
-    	info.refresh();
-    	game.refresh();
+		if (key == KEY_LEFT)
+			p << p;
+		else if (key == KEY_RIGHT)
+			p >> p;
+		else if (key == KEY_UP)
+			--p;
+		else if (key == KEY_DOWN)
+			++p;
+		else if (key == 32){
+			;
+		}
+		else if (key == 27) {
+			endwin();
+			break;
+		}
+		print_info(&info, start);
+		info.refresh();
+		game.refresh();
 	}
 	return(0);
 }

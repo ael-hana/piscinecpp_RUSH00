@@ -1,5 +1,17 @@
 #include "Class.Aplayer.hpp"
 
+Aplayer::Aplayer(void){
+}
+
+Aplayer::Aplayer(std::string str, int life, int attack , int x, int y) {
+	this->_name = str;
+	this->_life = life;
+	this->_attack = attack;
+	this->_touch = 0;
+	this->_x = x;
+	this->_y = y;
+}
+
 Aplayer		&Aplayer::operator=(Aplayer const & ins){
 	this->_life = ins._life;
 	this->_name = ins._name;
@@ -10,8 +22,8 @@ Aplayer		&Aplayer::operator=(Aplayer const & ins){
 	return (*this);
 }
 
-std::string		Aplayer::getName(void){
-	return this->_name;
+char		const *Aplayer::getName(void){
+	return this->_name.c_str();
 }
 
 int			Aplayer::getPosX(void){
@@ -38,23 +50,30 @@ int			Aplayer::setLife(int val){
 }
 
 Aplayer	&Aplayer::operator++(void){
-	++this->_y;
+	if ((this->_y) < WINDOW_Y)
+		++this->_y;
 	return (*this);
 }
 
 Aplayer	&Aplayer::operator--(void){
-	--this->_y;
+	if (this->_y > 0)
+		--this->_y;
 	return (*this);
 }
 
 Aplayer	&Aplayer::operator<<(Aplayer const & ins){
 	(void)ins;
-	--this->_x;
+	if (this->_x > 0)
+		--this->_x;
 	return (*this);
 }
 
 Aplayer	&Aplayer::operator>>(Aplayer const & ins){
 	(void) ins;
-	++this->_x;
+	if ((this->_x) < WINDOW_X)
+		++this->_x;
 	return (*this);
+}
+
+Aplayer::~Aplayer(){
 }

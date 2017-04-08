@@ -2,13 +2,17 @@ NAME = ft_retro
 
 SRC = main.cpp \
 		Ncurse.cpp \
+	Class.Aplayer.cpp \
+	Class.Enemy.cpp \
+	Class.Gamer.cpp \
+	Class.Shoot.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 FLAGS = -Wall -Wextra -Werror -I.
 
 $(NAME): $(OBJ)
-	clang++ $(FLAGS) -o $(NAME) $(SRC) -lncurses
+	clang++ $(FLAGS) -o $(NAME) $(OBJ) -lncurses
 
 all: $(NAME)
 

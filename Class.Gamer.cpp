@@ -22,3 +22,9 @@ Gamer &Gamer::operator=(Gamer const & ins){
 Gamer::Gamer(Gamer const & ins){
 	*this = ins;
 }
+
+Gamer::Gamer(void){
+}
+
+Gamer::~Gamer(void){
+}

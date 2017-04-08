@@ -8,6 +8,8 @@ Enemy::Enemy(std::string str, int life, int attack , int x, int y) {
 	this->_x = x;
 	this->_y = y;
 }
+Enemy::~Enemy(){
+}
 
 Enemy::Enemy(Enemy const &ins){
 	*this = ins;
