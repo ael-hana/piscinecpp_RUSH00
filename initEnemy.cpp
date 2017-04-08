@@ -31,23 +31,32 @@ void	list_add_EntitiesEnemy(Aplayer *ins)
 	ptr->next = list;
 }
 
-void	eventLoopEnemy(Ncurse *game){
+void	eventLoopEnemy(Ncurse *game, Gamer *g){
 	t_node	*ptr;
 	t_node	*tmp;
 	static int	loop = 0;
 	char		tab[] = "ABCDEFGH";
 	std::string str(1, tab[rand() % 8]);
+	int			touch = TOUCH_ENEMY;
+
 	++loop;
 	ptr = insListEnemy(NULL);
 	if (loop % 3000 == 0)
 		list_add_EntitiesEnemy(new Enemy(str, 0, 0, WINDOW_X, rand() % WINDOW_Y));
 	while (ptr) {
 		if (loop % 100 == 0)
+		{
 			*(ptr->ptr) << *(ptr->ptr);
+			if (ptr->ptr->getPosX() == g->getPosX() && ptr->ptr->getPosY() == g->getPosY())
+				g->setLife((g->getLife() - touch));
+		}
+		if (g->getLife() == 0)
+			return;
 		if (ptr->ptr->getPosX() == 0)
 		{
 			tmp = ptr->next;
-			list_free_Entities(ptr->ptr);
+			list_free_EntitiesEnemy(ptr->ptr);
+			g->setScore(g->getScore() + touch);
 			ptr = tmp;
 		}
 		else
@@ -62,7 +71,6 @@ void	list_free_EntitiesEnemy(Aplayer *ins)
 {
 	t_node	*ptr;
 	t_node	*tmp;
-
 	ptr = insListEnemy(NULL);
 	if (ptr == NULL)
 		return;
@@ -70,7 +78,7 @@ void	list_free_EntitiesEnemy(Aplayer *ins)
 	{
 		tmp = ptr->next;
 		delete ptr;
-		insList(tmp, 1);
+		insListEnemy(tmp, 1);
 		return;
 	}
 	while (ptr->next)

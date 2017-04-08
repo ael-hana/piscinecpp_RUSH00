@@ -28,3 +28,16 @@ Gamer::Gamer(void){
 
 Gamer::~Gamer(void){
 }
+
+int		Gamer::getScore(void)
+{
+	return this->_Score;
+}
+
+int		Gamer::setScore(int val)
+{
+	this->_Score = val;
+	return val;
+}
+
+int		Gamer::_Score = 0;

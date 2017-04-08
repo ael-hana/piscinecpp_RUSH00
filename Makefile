@@ -11,7 +11,7 @@ SRC = main.cpp \
 
 OBJ = $(SRC:.cpp=.o)
 
-FLAGS = -Wall -Wextra -Werror -I.
+FLAGS = -Wall -Wextra -Werror -g -I.
 
 $(NAME): $(OBJ)
 	clang++ $(FLAGS) -o $(NAME) $(OBJ) -lncurses

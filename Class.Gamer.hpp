@@ -5,6 +5,7 @@
 class Gamer : public Aplayer
 {
 private:
+	static int		_Score;
 	Gamer(void);
 
 public:
@@ -12,6 +13,7 @@ public:
 	Gamer(Gamer const &);
 	Gamer &operator=(Gamer const &);
 	virtual		~Gamer();
-
+	int			setScore(int);
+	int			getScore(void);
 };
 #endif
