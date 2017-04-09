@@ -59,7 +59,7 @@ void	eventLoopEnemy(Ncurse *game, Gamer *g){
 	pid_t pid;
 	static int	loop = 0;
 	static int	loopshoot = 0;
-	static int	loopins = 3000;
+	static int	loopins = 100;
 	std::string		tab[] = {"A", "B", "C", "D", "E", "F", "G", "H", "TOTO", "ZIZI",
 		"SEGFAULT", "COTON", "ZAZ", "THOR", "PAMPATA", "GARGAMEL"};
 	std::string str(tab[rand() % 15]);
@@ -69,10 +69,10 @@ void	eventLoopEnemy(Ncurse *game, Gamer *g){
 	if (loop <= 0)
 		loop = 1;
 	if ((g->getScore() / 100) == 1)
-		loopins = 2000;
+		loopins = 80;
 	if ((g->getScore() / 100) == 3)
-		loopins = 1000;
-	if ((g->getScore() / 100) >= 5 && loopins > 300)
+		loopins = 40;
+	if ((g->getScore() / 100) >= 5 && loopins > 5)
 		loopins -= 1;
 	if (loop % loopins == 0)
 	{
@@ -84,19 +84,16 @@ void	eventLoopEnemy(Ncurse *game, Gamer *g){
 	}
 	ptr = insListEnemy(NULL);
 	while (ptr) {
-		if (loop % 100 == 0)
+		*(ptr->ptr) << *(ptr->ptr);
+		if (ptr->ptr->getPosX() == g->getPosX() &&
+			ptr->ptr->getPosY() == g->getPosY())
 		{
-			*(ptr->ptr) << *(ptr->ptr);
-			if (ptr->ptr->getPosX() == g->getPosX() &&
-				ptr->ptr->getPosY() == g->getPosY())
-			{
-				ptr->ptr->setPosX(0);
-				std::cout << " TIG !";
-				pid = fork();
-				if (pid == 0)
-					execve("/usr/bin/say", (char *const *)newargv, env);
-				g->setLife((g->getLife() - touch));
-			}
+			ptr->ptr->setPosX(0);
+			std::cout << " TIG !";
+			pid = fork();
+			if (pid == 0)
+				execve("/usr/bin/say", (char *const *)newargv, env);
+			g->setLife((g->getLife() - touch));
 		}
 		if (g->getLife() == 0)
 			return;

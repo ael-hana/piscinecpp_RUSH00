@@ -44,17 +44,17 @@ void	list_add_Entities(Aplayer *ins)
 	++loop;
 	ptr = insList(NULL);
 	while (ptr) {
-		if (loop % 100 == 0)
-			*(ptr->ptr) >> *(ptr->ptr);
+		*(ptr->ptr) >> *(ptr->ptr);
 		en = insListEnemy(NULL);
 		while (en)
 		{
 			if (ptr && ptr->ptr->getPosX() == en->ptr->getPosX() &&
 				ptr->ptr->getPosY() == en->ptr->getPosY())
 			{
+				tmp = ptr->next;
 				list_free_Entities(ptr->ptr);
 				list_free_EntitiesEnemy(en->ptr);
-				ptr = insList(NULL);
+				ptr = tmp;
 				g->setScore(g->getScore() + touch);
 				en = insListEnemy(NULL);
 			}

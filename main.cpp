@@ -8,6 +8,7 @@
 #include "Class.Shoot.hpp"
 #include "init.hpp"
 #include "initEnemy.hpp"
+#include <unistd.h>
 
 void	display_limit(Ncurse *game){
 	game->clear();
@@ -67,6 +68,7 @@ int main(void) {
 	title.print("ft_retro", 0, 36);
 	title.refresh();
 	while (1) {
+		usleep(25000);
 		display_limit(&game);
 		game.print(p.getName(), p.getPosY(), p.getPosX());
 		key = game.waitForInput();
