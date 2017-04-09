@@ -10,11 +10,12 @@ Ncurse::Ncurse(int nbLine, int nbColumn, int posx, int posy) : _nbLine(nbLine), 
   curs_set(0);
   start_color();
   cbreak();
-  init_color(COLOR_CYAN, 212, 212, 212);
   init_pair(1, COLOR_CYAN, COLOR_BLACK);
   init_pair(2, COLOR_WHITE, COLOR_BLACK);
   init_pair(3, COLOR_YELLOW, COLOR_BLACK);
   init_pair(4, COLOR_RED, COLOR_BLACK);
+  init_color(COLOR_CYAN, 212, 212, 212);
+attron(COLOR_PAIR(1));
   this->_win = newwin(this->_nbLine, this->_nbColumn, this->_posx, this->_posy);
   nodelay(this->_win, true);
   keypad(this->_win, true);
@@ -43,7 +44,7 @@ Ncurse &    Ncurse::operator=(Ncurse const & src) {
 }
 
 void        Ncurse::print(const char *str, int y, int x) const {
-  mvwprintw(this->_win, y, x, str);
+	mvwprintw(this->_win, y, x, str);
 }
 
 void        Ncurse::clear(void) const {

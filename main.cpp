@@ -82,5 +82,6 @@ int main(void) {
 		info.refresh();
 		game.refresh();
 	}
+	std::cout << "Bocal Win :( Are you worse than level 2 ??? LOL Coton.js is better than you !!!" << std::endl;
 	return(0);
 }
