@@ -1,4 +1,8 @@
 #include "init.hpp"
+#include "initEnemy.hpp"
+#include "Class.Enemy.hpp"
+t_node	*insListEnemy(t_node *, int = 0);
+
 
 t_node	*insList(t_node *ins, int opt = 0)
 {
@@ -30,9 +34,11 @@ void	list_add_Entities(Aplayer *ins)
 	ptr->next = list;
 }
 
-void	eventLoop(Ncurse *game){
+	void	eventLoop(Ncurse *game, Gamer *g){
 	t_node	*ptr;
 	t_node	*tmp;
+	t_node	*en;
+	const int			touch = TOUCH_ENEMY;
 	static int	loop = 0;
 
 	++loop;
@@ -40,13 +46,28 @@ void	eventLoop(Ncurse *game){
 	while (ptr) {
 		if (loop % 100 == 0)
 			*(ptr->ptr) >> *(ptr->ptr);
-		if (ptr->ptr->getPosX() == WINDOW_X)
+		en = insListEnemy(NULL);
+		while (en)
+		{
+			if (ptr && ptr->ptr->getPosX() == en->ptr->getPosX() &&
+				ptr->ptr->getPosY() == en->ptr->getPosY())
+			{
+				list_free_Entities(ptr->ptr);
+				list_free_EntitiesEnemy(en->ptr);
+				ptr = insList(NULL);
+				g->setScore(g->getScore() + touch);
+				en = insListEnemy(NULL);
+			}
+			else if (en)
+				en = en->next;
+		}
+		if (ptr && ptr->ptr->getPosX() == WINDOW_X)
 		{
 			tmp = ptr->next;
 			list_free_Entities(ptr->ptr);
 			ptr = tmp;
 		}
-		else
+		else if (ptr)
 		{
 			game->print(ptr->ptr->getName(), ptr->ptr->getPosY(), ptr->ptr->getPosX());
 			ptr = ptr->next;
@@ -65,6 +86,7 @@ void	list_free_Entities(Aplayer *ins)
 	if (ins == ptr->ptr)
 	{
 		tmp = ptr->next;
+		delete ptr->ptr;
 		delete ptr;
 		insList(tmp, 1);
 		return;
@@ -74,6 +96,7 @@ void	list_free_Entities(Aplayer *ins)
 		if (ins == ptr->next->ptr)
 		{
 			tmp = ptr->next->next;
+			delete ptr->next->ptr;
 			delete ptr->next;
 			ptr->next = tmp;
 			return;

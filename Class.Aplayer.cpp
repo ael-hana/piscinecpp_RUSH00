@@ -49,6 +49,16 @@ int			Aplayer::setLife(int val){
 	return this->_life;
 }
 
+int			Aplayer::setPosX(int val){
+	this->_x = val;
+	return this->_x;
+}
+
+int			Aplayer::setPosY(int val){
+	this->_y = val;
+	return this->_y;
+}
+
 Aplayer	&Aplayer::operator++(void){
 	if ((this->_y) < WINDOW_Y)
 		++this->_y;

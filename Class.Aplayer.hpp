@@ -24,6 +24,8 @@ protected:
 public:
 	int				getPosX(void);
 	int				getPosY(void);
+	int				setPosX(int);
+	int				setPosY(int);
 	int				getAttach(void);
 	int				getLife(void);
 	char			const *getName(void);

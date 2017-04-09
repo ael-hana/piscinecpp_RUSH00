@@ -71,11 +71,10 @@ int main(void) {
 		game.print(p.getName(), p.getPosY(), p.getPosX());
 		key = game.waitForInput();
 		player(&p, key);
-		eventLoop(&game);
-		eventLoopEnemy(&game, &p);
-		if (p.getLife() == 0)
-			return (0);
-		if (key == 27) {
+		eventLoop(&game, &p);
+		if (p.getLife())
+			eventLoopEnemy(&game, &p);
+		if (p.getLife() == 0 || key == 27) {
 			endwin();
 			break;
 		}
